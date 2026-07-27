@@ -24,6 +24,13 @@ Or straight from this repo, without cloning:
 sbx create --kit "git+https://github.com/natesilva/sbx-kit-uvx.git" claude .
 ```
 
+Remote kit sources are allowlisted, and `sbx` ships allowing only
+`docker.io/`, so that form fails until you opt in to this publisher:
+
+```sh
+sbx settings set kit.allowedSources '["docker.io/","github.com/natesilva/"]'
+```
+
 Verify:
 
 ```sh
