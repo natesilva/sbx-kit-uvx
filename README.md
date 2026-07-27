@@ -6,22 +6,22 @@ run Python tools straight from PyPI.
 
 ## Usage
 
-Add to a running sandbox (state is preserved):
+Add to an existing sandbox (its state is preserved across the recreate):
 
 ```sh
-sbx kit add ./sbx-kit-uvx
+sbx kit add my-sandbox ./sbx-kit-uvx
 ```
 
-Or start a sandbox with it:
+Or create a sandbox with it:
 
 ```sh
-sbx run claude --kit ./sbx-kit-uvx
+sbx create --name my-sandbox --kit ./sbx-kit-uvx claude .
 ```
 
 Or straight from this repo, without cloning:
 
 ```sh
-sbx create --kit "git+https://github.com/natesilva/sbx-kit-uvx.git" claude .
+sbx create --name my-sandbox --kit "git+https://github.com/natesilva/sbx-kit-uvx.git" claude .
 ```
 
 Remote kit sources are allowlisted, and `sbx` ships allowing only
@@ -31,12 +31,15 @@ Remote kit sources are allowlisted, and `sbx` ships allowing only
 sbx settings set kit.allowedSources '["docker.io/","github.com/natesilva/"]'
 ```
 
-Verify:
+Verify from the host:
 
 ```sh
-uvx --version
-uvx ruff --version
+sbx exec my-sandbox uvx --version
+sbx exec my-sandbox uvx ruff --version
 ```
+
+Or from inside the sandbox (`sbx exec -it my-sandbox bash`), just
+`uvx --version`.
 
 ## What it does
 
